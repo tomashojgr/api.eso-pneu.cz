@@ -21,19 +21,16 @@ tags:
 paths:
   /getContentInfo:
     post:
-      summary: Return info about routing and so on
       operationId: getContentInfo
+      summary: Return info about routing and so on
       consumes:
-        - application/json      
+        - application/json
       parameters:
-        - in: body
+        - name: url
+          in: body
           schema:
-            name: url
-            type: array
-            items:
-            - path:
-                type: string
-                example: /pneumatiky/michelin
+            type: string
+            example: /pneumatiky/michelin
       produces: 
       - application/json
       responses:
