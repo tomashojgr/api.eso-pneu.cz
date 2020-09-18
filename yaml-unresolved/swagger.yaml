@@ -33,7 +33,7 @@ paths:
             items:
             - path:
                 type: string
-                example: /pneu/michellin
+                example: /pneumatiky/michelin
       produces: 
       - application/json
       responses:
@@ -797,7 +797,7 @@ definitions:
         example: "Pneumatiky"
       title_long: 
         type: string
-        example: "Vyberte si rozměr vašich pneu"
+        example: "Vyberte si rozměr vašich pneumatik"
     additionalProperties:
       allOf:
         - $ref: '#/definitions/SearchFilterGroup'
@@ -818,10 +818,14 @@ definitions:
     properties:
       presenter:
         type: string
-        example: Homepage
+        example: Product
       action:
         type: string
         example: default
+      BreadCrumbs:
+        type: array
+        items:
+          $ref: '#/definitions/BreadCrumbItem'
       content:
         type: object
         allOf:
@@ -829,7 +833,21 @@ definitions:
         - $ref: '#/definitions/InformationPage'
         
           
-      
+  BreadCrumbItem:
+    type: object
+    properties:
+      url:
+        type: string
+        example: /
+      title_short:
+        type: string
+        example: Domů
+      title_long:
+        type: string
+        example: Na úvodní stránku
+      icon:
+        type: string
+        example: /img/home.png
       
       
         
