@@ -19,6 +19,7 @@ tags:
 # schemes:
 # - https
 paths:
+
   /getContentInfo:
     post:
       operationId: getContentInfo
@@ -26,11 +27,17 @@ paths:
       consumes:
         - application/json
       parameters:
-        - name: url
-          in: body
+        - in: body
+          name: params
           schema:
-            type: string
-            example: /pneumatiky/michelin
+            type: object
+            properties:
+              - name: path
+                type: string
+                example: /pneumatiky/michelin
+              - name: query
+                type: string
+                example: ?id=1
       produces: 
       - application/json
       responses:
@@ -810,6 +817,8 @@ definitions:
       title:  
         type: string
         example: "Osobní"
+  
+  
   ContentInfo:
     type: object
     properties:
