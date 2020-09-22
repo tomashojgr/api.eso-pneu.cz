@@ -19,21 +19,25 @@ tags:
 # schemes:
 # - https
 paths:
+
   /getContentInfo:
     post:
-      summary: Return info about routing and so on
       operationId: getContentInfo
+      summary: Return info about routing and so on
       consumes:
-        - application/json      
+        - application/json
       parameters:
         - in: body
+          name: params
           schema:
-            name: url
-            type: array
-            items:
-            - path:
-                type: string
-                example: /pneu/michellin
+            type: object
+            properties:
+            - name: path
+              type: string
+              example: /pneumatiky/michelin
+            - name: query
+              type: string
+              example: ?q=Alpin
       produces: 
       - application/json
       responses:
@@ -797,7 +801,7 @@ definitions:
         example: "Pneumatiky"
       title_long: 
         type: string
-        example: "Vyberte si rozměr vašich pneu"
+        example: "Vyberte si rozměr vašich pneumatik"
     additionalProperties:
       allOf:
         - $ref: '#/definitions/SearchFilterGroup'
@@ -813,23 +817,71 @@ definitions:
       title:  
         type: string
         example: "Osobní"
+  
+  
   ContentInfo:
     type: object
     properties:
-      presenter:
+      Presenter:
         type: string
         example: Homepage
-      action:
+      Action:
         type: string
         example: default
-      content:
+      MetaInformation:
+        $ref: '#/definitions/MetaInformation'
+      BreadCrumbs:
+        type: array
+        items:
+          $ref: '#/definitions/BreadCrumbItem'
+      Content:
         type: object
         allOf:
         - $ref: '#/definitions/Product'
         - $ref: '#/definitions/InformationPage'
-        
+        example:
+        - title: Alpin A4
+          description: Ahoj
+        - title: Alpin A5
+          description: Ahoj
           
-      
+  MetaInformation:
+    type: object
+    properties:
+      title:
+        type: string
+        example: Eso-Pneu.cz
+      description: 
+        type: string
+        example: Pneu za super ceny, velká část skladem, nebo dostupná do druhého dne.
+      h1: 
+        type: string
+        example: Máme za sebou léta zkušeností
+      content_description:
+        type: string
+        example: '<p>Jsme specialisté na alu kola a proto vám můžeme nabídnout nejen skvělé ceny, ale zároveň potřebné <strong>technické informace a odbornou pomoc</strong>.</p>
+			<p>Kromě prodeje alu kol a pneumatik nabízíme také komplexní pneuservisní služby.</p>
+			<p>Alu kola od Eso-pneu.cz jsou určena pro evropský trh a splňují podmínky pro provoz na českých silnicích.</p>
+			<p>Využijte služeb našeho nového pneuservisu. <strong>Otevřeli jsme pro vás PNEUCENTRUM MOTOL</strong>, kde vám pneumatiky a alukola obujeme a osadíme na vaše auto.<br />
+			Zároveň můžete využít služeb autoservisu. <strong>Náš autoservis v Praze 5</strong>, v Plzeňské ulici nabízí mimo jiné tyto služby:
+				výměnu olejů a filtrů, servis geometrie, servis klimatizace, opravy brzd, řízení, výfukového systému, diagnostiku motoru, servisní prohlídky a přípravy na STK.
+			</p>'
+          
+  BreadCrumbItem:
+    type: object
+    properties:
+      url:
+        type: string
+        example: /
+      title_short:
+        type: string
+        example: Domů
+      title_long:
+        type: string
+        example: Na úvodní stránku
+      icon:
+        type: string
+        example: /img/home.png
       
       
         
