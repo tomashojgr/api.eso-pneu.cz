@@ -27,17 +27,10 @@ paths:
       consumes:
         - application/json
       parameters:
-        - in: body
-          name: params
+        - name: body
+          in: body
           schema:
-            type: object
-            properties:
-            - name: path
-              type: string
-              example: /pneumatiky/michelin
-            - name: query
-              type: string
-              example: ?q=Alpin
+            $ref: '#/definitions/ContentInfoRequest'
       produces: 
       - application/json
       responses:
@@ -822,19 +815,19 @@ definitions:
   ContentInfo:
     type: object
     properties:
-      Presenter:
+      presenter:
         type: string
         example: Homepage
-      Action:
+      action:
         type: string
         example: default
-      MetaInformation:
+      metaInformation:
         $ref: '#/definitions/MetaInformation'
-      BreadCrumbs:
+      breadCrumbs:
         type: array
         items:
           $ref: '#/definitions/BreadCrumbItem'
-      Content:
+      content:
         type: object
         allOf:
         - $ref: '#/definitions/Product'
@@ -859,13 +852,14 @@ definitions:
         example: Máme za sebou léta zkušeností
       content_description:
         type: string
-        example: '<p>Jsme specialisté na alu kola a proto vám můžeme nabídnout nejen skvělé ceny, ale zároveň potřebné <strong>technické informace a odbornou pomoc</strong>.</p>
-			<p>Kromě prodeje alu kol a pneumatik nabízíme také komplexní pneuservisní služby.</p>
-			<p>Alu kola od Eso-pneu.cz jsou určena pro evropský trh a splňují podmínky pro provoz na českých silnicích.</p>
-			<p>Využijte služeb našeho nového pneuservisu. <strong>Otevřeli jsme pro vás PNEUCENTRUM MOTOL</strong>, kde vám pneumatiky a alukola obujeme a osadíme na vaše auto.<br />
-			Zároveň můžete využít služeb autoservisu. <strong>Náš autoservis v Praze 5</strong>, v Plzeňské ulici nabízí mimo jiné tyto služby:
-				výměnu olejů a filtrů, servis geometrie, servis klimatizace, opravy brzd, řízení, výfukového systému, diagnostiku motoru, servisní prohlídky a přípravy na STK.
-			</p>'
+        example: |
+          <p>Jsme specialisté na alu kola a proto vám můžeme nabídnout nejen skvělé ceny, ale zároveň potřebné <strong>technické informace a odbornou pomoc</strong>.</p>
+          <p>Kromě prodeje alu kol a pneumatik nabízíme také komplexní pneuservisní služby.</p>
+          <p>Alu kola od Eso-pneu.cz jsou určena pro evropský trh a splňují podmínky pro provoz na českých silnicích.</p>
+          <p>Využijte služeb našeho nového pneuservisu. <strong>Otevřeli jsme pro vás PNEUCENTRUM MOTOL</strong>, kde vám pneumatiky a alukola obujeme a osadíme na vaše auto.<br />
+          Zároveň můžete využít služeb autoservisu. <strong>Náš autoservis v Praze 5</strong>, v Plzeňské ulici nabízí mimo jiné tyto služby:
+          výměnu olejů a filtrů, servis geometrie, servis klimatizace, opravy brzd, řízení, výfukového systému, diagnostiku motoru, servisní prohlídky a přípravy na STK.
+          </p>
           
   BreadCrumbItem:
     type: object
@@ -882,6 +876,17 @@ definitions:
       icon:
         type: string
         example: /img/home.png
+
+  ContentInfoRequest:
+    type: object
+    properties:
+      path:
+        type: string
+        example: /pneumatiky/michelin
+      query:
+        type: string
+        example: ?q=Alpin
+        
       
       
         
